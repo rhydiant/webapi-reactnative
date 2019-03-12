@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { REQUEST_PENDING, REQUEST_ERROR, REQUEST_SUCCESS } from './types';
 
 export function pending() {
