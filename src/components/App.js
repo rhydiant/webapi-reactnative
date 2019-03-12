@@ -9,7 +9,9 @@
 
 import React from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { Provider } from 'react-redux';
 
+import store from '../redux/store';
 import List from './List';
 
 const styles = StyleSheet.create({
@@ -21,10 +23,12 @@ const styles = StyleSheet.create({
 
 export default function () {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#F5FCFF' }}>
-      <View style={styles.container}>
-        <List />
-      </View>
-    </SafeAreaView>
+    <Provider store={store}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#F5FCFF' }}>
+        <View style={styles.container}>
+          <List />
+        </View>
+      </SafeAreaView>
+    </Provider>
   );
 }

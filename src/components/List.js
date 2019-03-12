@@ -1,7 +1,11 @@
+// @flow
+
 import React from 'react';
 import {
   View, FlatList, StyleSheet, Text,
 } from 'react-native';
+
+import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,32 +20,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class List extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isLoading: true, data: [] };
-  }
+type Props = {
+  isLoading: boolean,
+  data: any,
+};
 
-  async componentDidMount() {
-    try {
-      this.setState({
-        isLoading: true,
-      });
-      const result = await fetch('https://jsonplaceholder.typicode.com/users');
-      const json = await result.json();
-      this.setState({
-        isLoading: false,
-        data: json,
-      });
-    } catch (error) {
-      this.setState({
-        isLoading: false,
-      });
-    }
-  }
-
+// eslint-disable-next-line react/prefer-stateless-function
+class List extends React.Component<Props> {
   render() {
-    const { isLoading, data } = this.state;
+    const { isLoading, data } = this.props;
     if (isLoading) {
       return (
         <View style={styles.container}>
@@ -56,3 +43,10 @@ export default class List extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  isLoading: state.isLoading,
+  data: state.data,
+});
+
+export default connect(mapStateToProps)(List);

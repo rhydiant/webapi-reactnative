@@ -1,6 +1,6 @@
 import { REQUEST_PENDING, REQUEST_ERROR, REQUEST_SUCCESS } from './types';
 
-function users(store = { isLoading: false }, action) {
+function users(store = { isLoading: false, data: [] }, action) {
   switch (action.type) {
     case REQUEST_PENDING:
       return { isLoading: true };
