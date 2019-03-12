@@ -2,7 +2,7 @@
 
 import { REQUEST_PENDING, REQUEST_ERROR, REQUEST_SUCCESS } from './types';
 
-export function pending() {
+export function fetchUsers() {
   return {
     type: REQUEST_PENDING,
   };

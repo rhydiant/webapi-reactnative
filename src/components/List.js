@@ -7,6 +7,8 @@ import {
 
 import { connect } from 'react-redux';
 
+import { fetchUsers } from '../redux/actionCreators';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -23,10 +25,16 @@ const styles = StyleSheet.create({
 type Props = {
   isLoading: boolean,
   data: any,
+  fetchUsers: any,
 };
 
 // eslint-disable-next-line react/prefer-stateless-function
 class List extends React.Component<Props> {
+  componentDidMount() {
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.fetchUsers();
+  }
+
   render() {
     const { isLoading, data } = this.props;
     if (isLoading) {
@@ -49,4 +57,11 @@ const mapStateToProps = state => ({
   data: state.data,
 });
 
-export default connect(mapStateToProps)(List);
+const mapDispatchToProps = {
+  fetchUsers,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(List);
